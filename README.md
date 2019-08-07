@@ -1,6 +1,8 @@
 # SWars
 Space-themed game with electronJS and a cool C++ server. This is an over-the-weekend project, to have some fun with electron JS. So not really a game, but a scaffolding to do things, right now each person can just move a spaceship. It has the basics of a multiplayer, real-time game. The client is with electron js and the server is with C++ (uses Winsock2, so it is basically limited to windows, but fairly easy to make it multi-platform, as the threading is done using std::thread but why bother? The client is most important to be multi-platform which it is). Dependencies are kept at minimum, the server uses **glm** for some vector stuff and that is it.
 
+![alt text](https://raw.githubusercontent.com/ImanHosseini/SWars/master/scrnshot.PNG)
+
 ## The Physics
 The physics of driving a spaceship is based on a simple model for throttle: by hitting space key, you add an external force in the forward direction. Now friction won't let you keep speeding into infinity, there is a friction force **-kv** (v: velocity vector) which means there is a maximum velocity you cannot go over. To make calculations independent of time spent by the program, the time spent since last update of the physics **dt** is measured (**std::chrono**) and used in the calculations. Also similar to friction force, for rotation, you use arrow keys to impose a torque on the spaceship and again there is a frictional torque countering that, (negatively) proportional to the angular velocity at any moment. 
 
