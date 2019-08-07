@@ -1,2 +1,7 @@
 # SWars
-Space-themed game with electronJS and a cool C++ server
+Space-themed game with electronJS and a cool C++ server. This is an over-the-weekend project, to have some fun with electron JS. It has the basics of a multiplayer, real-time game. The client is with electron js and the server is with C++ (uses Winsock2, so it is basically limited to windows, but fairly easy to make it multi-platform, as the threading is done using std::thread but why bother? The client is most important to be multi-platform which it is).
+
+## Architecture
+What I wanted to really perfect here, was making the server really, really fast. That is why I chose C++ and the way it works is that there is a thread on which the physics of the game is run, and then for each client which is connected a thread for receiving and a thread for sending data. Everything is raw TCP, data is serialized in a very packed manner and so it is very performant. The typical memory the server uses is 1MB. 
+ ### Broadcast
+The **Broadcaster** class is in charge of managing the broadcasting threads, these threads send a frame and then wait until new frame is available and then wake up and send it. To achieve it **std::condition_variable** is used, you need to do it on different threads to send them out to the clients simultaneously (real simultaneously depends on how many cores you have but still as parallel as possible is good right?) and this approach of waiting on new frames, means you don't keep making new threads which would incur overhead AND this thin broadcaster class holds a copy of the frame, thus it does not lock the **df** (holding a frame of the game) in the main game thread so again helps keeping things _fast_. 
