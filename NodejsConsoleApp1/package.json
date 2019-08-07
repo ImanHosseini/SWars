@@ -1,0 +1,16 @@
+{
+  "name": "nodejs-console-app1",
+  "version": "0.0.0",
+  "description": "NodejsConsoleApp1",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --inspect"
+  },
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "electron": "^6.0.0",
+    "victor": "^1.1.0"
+  }
+}
