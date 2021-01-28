@@ -10,7 +10,7 @@
     "name": ""
   },
   "dependencies": {
-    "electron": "^6.0.0",
+    "electron": "^9.4.0",
     "victor": "^1.1.0"
   }
 }
